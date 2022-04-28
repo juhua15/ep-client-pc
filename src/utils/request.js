@@ -20,6 +20,7 @@ request.interceptors.request.use((config) => {
   if (profile.token) {
     config.headers.Authorization = `Bearer ${profile.token}`
   }
+  // console.log(config)
   return config
 }, err => {
   return Promise.reject(err)
@@ -29,8 +30,9 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use((res) => {
   return res.data
 }, err => {
+  // console.log(err.response.status)
   // 401 状态码进入该函数
-  if (err.response && err.response.staus === 401) {
+  if (err.response && err.response.status === 401) {
     // 1、清空无效信息
     // 2、跳转到登录页面
     // 3 跳转需要传参（当前页码)给登录页码
@@ -53,6 +55,6 @@ export default (url, method, submitData) => {
     // 2、如果不是get需要使用data传递数据
     // 【】 设置一个动态的key 【】 里可以写js表达式 js表达式的执行结果可以用作key
 
-    [method.toUpperCase() === 'GET' ? 'param' : 'data']: submitData
+    [method.toUpperCase() === 'GET' ? 'params' : 'data']: submitData
   })
 }
