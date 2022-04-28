@@ -6,12 +6,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'HomeView'
+}
 </script>
 
 <style lang="less" scoped>
-@import '../../assets/styles/mixins.less';
 .container{
-  .hoverShadow()
+  .hoverShadow();
+  color: @xtxColor;
 }
 </style>>
