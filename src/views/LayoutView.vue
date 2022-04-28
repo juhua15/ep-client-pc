@@ -3,6 +3,7 @@
   <AppNavbar />
   <!-- 头部组件 -->
   <AppHeader />
+  <AppHeaderSticky/>
   <!-- 二级路由    -->
   <div class="app-body" style="height: 600px">
     <router-view></router-view>
@@ -16,13 +17,15 @@ import { useStore } from 'vuex'
 import AppNavbar from '@/components/app-navbar.vue'
 import AppHeader from '@/components/app-header'
 import AppFooter from '@/components/app-footer'
+import AppHeaderSticky from '@/components/app-header-sticky.vue'
 import { onMounted } from 'vue'
 export default {
   name: 'LayoutView',
   components: {
     AppNavbar,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppHeaderSticky
   },
   setup () {
     const store = useStore()
