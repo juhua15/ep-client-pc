@@ -1,6 +1,6 @@
 <template>
   <div class="app-header-sticky" v-bind:class="{show:y>78}">
-    <div class="container">
+    <div class="container" v-show="y>78">
       <RouterLink class="logo" to="/" />
       <AppHeaderNav  />
       <div class="right">
@@ -12,23 +12,36 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { useWindowScroll } from '@vueuse/core'
+// import { onMounted, ref } from 'vue'
+
 import AppHeaderNav from './app-header-nav'
 export default {
   name: 'AppHeaderSticky',
   components: { AppHeaderNav },
+  // 使用vueuse 库实现对y轴的监听
   setup () {
-    const y = ref(0)
-    onMounted(() => {
-      window.onscroll = () => {
-        const scrolpTop = document.documentElement.scrollTop
-        y.value = scrolpTop
-      }
-    })
+    const { y } = useWindowScroll()
+    // console.log(y.value)
     return {
       y
     }
   }
+  // 使用原生方式获取y轴的值
+  // #region
+//   setup () {
+//     const y = ref(0)
+//     onMounted(() => {
+//       window.onscroll = () => {
+//         const scrolpTop = document.documentElement.scrollTop
+//         y.value = scrolpTop
+//       }
+//     })
+//     return {
+//       y
+//     }
+//   }
+  // #endregion
 }
 </script>
 
