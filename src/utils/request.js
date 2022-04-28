@@ -43,4 +43,16 @@ request.interceptors.response.use((res) => {
   }
   return Promise.reject(err)
 })
-export default request
+
+// 请求工具函数
+export default (url, method, submitData) => {
+  return request({
+    url,
+    method,
+    // 1、如果get请求需要使用prama 传递数据
+    // 2、如果不是get需要使用data传递数据
+    // 【】 设置一个动态的key 【】 里可以写js表达式 js表达式的执行结果可以用作key
+
+    [method.toUpperCase() === 'GET' ? 'param' : 'data']: submitData
+  })
+}
