@@ -1,11 +1,23 @@
 <template>
   <div class="home-banner">
-    <XtxCarousel />
+    <XtxCarousel aotuPlay :sliders="sliders" />
   </div>
 </template>
 <script>
+import { findBanner } from '@/api/home'
+import { ref } from 'vue-demi'
 export default {
-  name: 'HomeBanner'
+  name: 'HomeBanner',
+  setup () {
+    // 轮播图数据
+    const sliders = ref([])
+    findBanner().then(({ result }) => {
+      sliders.value = result
+    })
+    return {
+      sliders
+    }
+  }
 }
 </script>
 <style scoped lang="less">

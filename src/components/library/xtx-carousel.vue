@@ -1,23 +1,92 @@
 <template>
-  <div class='xtx-carousel'>
-    <ul class="carousel-body">
-      <li class="carousel-item fade">
+  <div class='xtx-carousel' @mouseenter="stop" @mouseleave="start">
+    <ul class="carousel-body" >
+      <li class="carousel-item " v-for="(item,index ) in sliders" :class="{fade:index ===currentIndex }" :key="index">
         <RouterLink to="/">
-          <img src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg" alt="">
+          <img :src="item.imgUrl" alt="">
         </RouterLink>
       </li>
     </ul>
-    <a href="javascript:;" class="carousel-btn prev"><i class="iconfont icon-angle-left"></i></a>
-    <a href="javascript:;" class="carousel-btn next"><i class="iconfont icon-angle-right"></i></a>
+    <a href="javascript:;" class="carousel-btn prev" @click="toggle(-1)"><i class="iconfont icon-angle-left" ></i></a>
+    <a href="javascript:;" class="carousel-btn next" @click="toggle(1)"><i class="iconfont icon-angle-right" ></i></a>
     <div class="carousel-indicator">
-      <span v-for="i in 5" :key="i"></span>
+      <span v-for="(item,i) in sliders" :key="i" :class="{active:currentIndex===i}" @click="chooseBaner(i)"></span>
     </div>
   </div>
 </template>
 
 <script>
+import { onUnmounted, ref, watch } from 'vue'
 export default {
-  name: 'XtxCarousel'
+  name: 'XtxCarousel',
+  props: {
+    sliders: {
+      type: Array,
+      default: () => []
+    },
+    duration: {
+      type: Number,
+      default: 3000
+    },
+    aotuPlay: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup (props) {
+    const currentIndex = ref(0)
+    let timmer = null
+    const aotuPlayFn = () => {
+      clearInterval(timmer)
+      timmer = setInterval(() => {
+        currentIndex.value === props.sliders.length - 1 ? currentIndex.value = 0 : currentIndex.value++
+      }, props.duration)
+    }
+    // 监听轮播图数据源并根据状态打开定时器
+    watch(() => props.sliders, (newValue) => {
+      if (newValue.length && props.aotuPlay) {
+        currentIndex.value = 0
+        aotuPlayFn()
+      }
+    }, {
+      immediate: true
+    })
+    // 鼠标进入关闭打开
+    const stop = () => {
+      clearInterval(timmer)
+    }
+    const start = () => {
+      if (props.sliders.length && props.aotuPlay) {
+        // currentIndex.value = 0
+        aotuPlayFn()
+      }
+    }
+    // 切换轮播图
+    const toggle = (step) => {
+      const newIndex = currentIndex.value + step
+      if (newIndex < 0) {
+        currentIndex.value = props.sliders.length - 1
+      } else if (newIndex > props.sliders.length - 1) {
+        currentIndex.value = 0
+      } else {
+        currentIndex.value = newIndex
+      }
+    }
+    const chooseBaner = (index) => {
+      currentIndex.value = index
+    }
+    // 销毁定时器
+    onUnmounted(() => {
+      clearInterval(timmer)
+    })
+    return {
+      currentIndex,
+      stop,
+      start,
+      toggle,
+      chooseBaner
+    }
+  }
 }
 </script>
 <style scoped lang="less">
