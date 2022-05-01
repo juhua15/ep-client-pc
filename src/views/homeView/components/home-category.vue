@@ -12,6 +12,11 @@
             child.name
           }}</RouterLink>
         </template>
+        <!-- 骨架 -->
+        <template v-else>
+          <xtx-skeleton style="margin-right: 20px"  bg="rgba(255,255,255,0.2)" :animated="true" height="20px" width="60px"></xtx-skeleton>
+           <xtx-skeleton bg="rgba(255,255,255,0.2)" :animated="true" height="20px" width="60px"></xtx-skeleton>
+        </template>
       </li>
     </ul>
       <template v-if="currentCategory && currentCategory.goods&& currentCategory.goods.length">
@@ -42,7 +47,9 @@
 <script>
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
+import xtxSkeleton from '@/components/library/xtx-skeleton.vue'
 export default {
+  components: { xtxSkeleton },
   name: 'HomeCategory',
   setup () {
     const store = useStore()
@@ -180,6 +187,17 @@ export default {
     .layer {
       display: block;
     }
+  }
+}
+.xtx-skeleton {
+  animation: fade 1s linear infinite alternate;
+}
+@keyframes fade {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>

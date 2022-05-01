@@ -4,5 +4,5 @@ import '@/assets/styles/common.less'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
-createApp(App).use(store).use(router).mount('#app')
+import UI from '@/components/library'
+createApp(App).use(store).use(UI).use(router).mount('#app')
