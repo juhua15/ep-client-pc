@@ -5,7 +5,7 @@
   <AppHeader />
   <AppHeaderSticky/>
   <!-- 二级路由    -->
-  <div class="app-body" style="height: 600px">
+  <div class="app-body" style="height: 100%">
     <router-view></router-view>
   </div>
   <!-- 底部组件 -->
