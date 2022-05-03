@@ -15,3 +15,10 @@ export const findNew = () => {
 export const findHot = () => {
   return request('home/hot', 'get')
 }
+
+export const findBrand = (limit) => {
+  return request('/home/brand', 'get', limit)
+}
+export const findGood = () => {
+  return request('/home/goods', 'GET')
+}

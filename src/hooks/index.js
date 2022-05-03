@@ -18,6 +18,9 @@ export const useLazyData = (target, apiFn) => {
           // console.log(result)
         })
       }
+    },
+    {
+      threshold: 0 // 触发函数的阈值
     }
   )
   return result
