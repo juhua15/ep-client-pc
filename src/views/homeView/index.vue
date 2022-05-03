@@ -14,6 +14,8 @@
         <HomeBrand />
         <!-- 商品区展示 -->
         <HomeProduct />
+        <!-- 人气专题 -->
+        <HomeSpecial/>
       </div>
     </div>
   </div>
@@ -25,9 +27,10 @@ import HomeNews from './components/home-news.vue'
 import HomeHot from './components/home-hot.vue'
 import HomeBrand from './components/home-brand.vue'
 import HomeProduct from './components/home-product.vue'
+import HomeSpecial from './components/home-special'
 export default {
   name: 'HomeView',
-  components: { HomeCategory, HomeBanner, HomeNews, HomeHot, HomeBrand, HomeProduct }
+  components: { HomeCategory, HomeBanner, HomeNews, HomeHot, HomeBrand, HomeProduct, HomeSpecial }
 }
 </script>
 <style scoped lang="less"></style>

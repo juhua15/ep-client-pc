@@ -1,13 +1,13 @@
 <template>
   <div class="goods-item">
-    <RouterLink to="/" class="image">
-      <img :src="goods.picture" alt="" />
+    <RouterLink :to="`/category/sub/${goods.id}`" class="image">
+      <img  v-lazy="goods.picture" alt="" />
     </RouterLink>
     <p class="name ellipsis-2">{{goods.name}}</p>
     <p class="desc ellipsis">{{goods.desc}}</p>
     <p class="price">&yen;{{goods.price}}</p>
     <div class="extra">
-      <RouterLink to="/">
+      <RouterLink :to="`/category/${goods.id}`">
         <span>找相似</span>
         <span>发现现多宝贝 &gt;</span>
       </RouterLink>

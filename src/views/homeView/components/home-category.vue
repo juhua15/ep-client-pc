@@ -8,7 +8,7 @@
       >
         <RouterLink to="/">{{ item.name }}</RouterLink>
         <template v-if="item.children">
-          <RouterLink v-for="child in item.children" to="/" :key="child.id">{{
+          <RouterLink v-for="child in item.children" :to="`/category/${child.id}`" :key="child.id">{{
             child.name
           }}</RouterLink>
         </template>
@@ -25,9 +25,9 @@
       <ul>
 
           <li v-for="item in currentCategory.goods" :key="item.id">
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${item.id}`">
               <img
-                :src="item.picture"
+                v-lazy="item.picture"
                 alt=""
               />
               <div class="info">

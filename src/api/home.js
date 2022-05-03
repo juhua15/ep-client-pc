@@ -15,10 +15,15 @@ export const findNew = () => {
 export const findHot = () => {
   return request('home/hot', 'get')
 }
-
+// 品牌
 export const findBrand = (limit) => {
   return request('/home/brand', 'get', limit)
 }
+// 商品分类
 export const findGood = () => {
   return request('/home/goods', 'GET')
+}
+// 最新专题
+export const findSpecial = () => {
+  return request('home/special', 'get')
 }

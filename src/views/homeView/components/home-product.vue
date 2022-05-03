@@ -3,13 +3,13 @@
     <HomePanel :title="cates.name" v-for="cates in goodsList" :key="cates.id">
       <template v-slot:right>
         <div class="sub">
-         <RouterLink v-for="sub in cates.children" :key="sub.id" to="/">{{sub.name}}</RouterLink>
+         <RouterLink v-for="sub in cates.children" :key="sub.id" :to="`/category/sub/${sub.id}`">{{sub.name}}</RouterLink>
         </div>
         <XtxMore />
       </template>
       <div class="box">
-        <RouterLink class="cover" to="/">
-          <img :src="cates.picture" alt="">
+        <RouterLink class="cover" :to="`/category/${cates.id}`">
+          <img v-lazy="cates.picture" alt="">
           <strong class="label">
             <span>{{cates.name}}馆</span>
             <span>{{cates.saleInfo}}</span>

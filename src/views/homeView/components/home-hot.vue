@@ -4,8 +4,8 @@
       <Transition name="fade">
         <ul v-if="goods.length" ref="pannel" class="goods-list">
           <li v-for="item in goods" :key="item.id">
-            <RouterLink to="/">
-              <img :src="item.picture" alt="">
+            <RouterLink :to="`/category/sub/${item.id}`">
+              <img  v-lazy="item.picture" alt="">
               <p class="name">{{item.title}}</p>
               <p class="desc">{{item.alt}}</p>
             </RouterLink>
